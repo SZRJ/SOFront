@@ -1,4 +1,4 @@
-FROM node:20.17.0 as build
+FROM node:18.13.0 as build
 
 WORKDIR /app
 
@@ -14,6 +14,7 @@ RUN ng build --configuration=production
 
 FROM nginx:latest
 
-COPY --from=build app/dist/aftas-angular /usr/share/nginx/html
+# Asegúrate de que la ruta aquí coincida con el outputPath de Angular
+COPY --from=build /app/dist/aftas-angular /usr/share/nginx/html
 
-EXPOSE 4200
+EXPOSE 80
