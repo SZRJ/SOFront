@@ -1,0 +1,41 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    container_name: PC3Datos
+    networks:
+      - my_network
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: nilouadmin
+      MONGO_INITDB_ROOT_PASSWORD: nilou123
+      MONGO_INITDB_DATABASE: DB
+    ports:
+      - "27017:27017"
+
+  api:
+    build: ./api  # Asumiendo que tu API está en el directorio ./api
+    container_name: api
+    networks:
+      - my_network
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URI=mongodb://PC3Datos:27017/DB
+      - MONGO_USER=nilouadmin
+      - MONGO_PASS=nilou123
+
+  angular:
+    build: ./angular  # Asumiendo que tu app de Angular está en el directorio ./angular
+    container_name: angular
+    networks:
+      - my_network
+    ports:
+      - "8080:8080"  # Exponemos el puerto 4200 para acceder a la app Angular
+    depends_on:
+      - api
+
+networks:
+  my_network:
+    driver: bridge
