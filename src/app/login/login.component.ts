@@ -20,10 +20,22 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) { }
 
   login() {
+    // Mostrar en consola que la solicitud se está enviando
+    console.log('Enviando solicitud de login...');
+    console.log(`Email: ${this.email}, Password: ${this.password}`);
+
     this.http.post('http://cranky_bouman:3000/Users/login', { email: this.email, password: this.password })
       .subscribe({
-        next: () => this.router.navigate(['/home']),
-        error: (err) => alert('Credenciales incorrectas'),
+        next: (response) => {
+          // Si la respuesta es exitosa, redirige al home
+          console.log('Conexión exitosa:', response);
+          this.router.navigate(['/home']);
+        },
+        error: (err) => {
+          // Si hay un error, muestra el mensaje en consola
+          console.error('Error en la solicitud:', err);
+          alert('Credenciales incorrectas');
+        },
       });
   }
 }
