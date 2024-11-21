@@ -28,7 +28,7 @@ export class MessagesComponent implements OnInit {
 
   fetchUsersAndMessages(): void {
     // Obtener usuarios
-    this.http.get('http://172.17.0.3:3000/Users')
+    this.http.get('http://cranky_bouman:3000/Users')
       .subscribe({
         next: (users: any) => {
           this.users = users;
@@ -41,7 +41,7 @@ export class MessagesComponent implements OnInit {
   }
 
   fetchMessages(): void {
-    this.http.get('http://172.17.0.3:3000/Messages')
+    this.http.get('http://cranky_bouman:3000/Messages')
       .subscribe({
         next: (messages: any) => {
 
@@ -93,7 +93,7 @@ export class MessagesComponent implements OnInit {
       readDate: new Date().toISOString() // Actualizar con la fecha actual
     };
 
-    this.http.patch(`http://172.17.0.3:3000/Messages/${message._id}`, { readDate: updatedMessage.readDate })
+    this.http.patch(`http://cranky_bouman:3000/Messages/${message._id}`, { readDate: updatedMessage.readDate })
       .subscribe({
         next: () => {
           console.log(`Mensaje ${message._id} marcado como leído.`);
@@ -106,7 +106,7 @@ export class MessagesComponent implements OnInit {
 
   deleteMessage(message: any): void {
     if (confirm('¿Estás seguro de que deseas eliminar este mensaje?')) {
-      this.http.delete(`http://172.17.0.3:3000/Messages/${message._id}`)
+      this.http.delete(`http://cranky_bouman:3000/Messages/${message._id}`)
         .subscribe({
           next: () => {
             console.log(`Mensaje ${message._id} eliminado.`);
