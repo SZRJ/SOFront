@@ -26,7 +26,7 @@ export class DepartmentsComponent implements OnInit {
   }
 
   fetchDepartments() {
-    this.http.get('http://cranky_bouman:3000/Departments')
+    this.http.get('http://172.17.0.3:3000/Departments')
       .subscribe({
         next: (data: any) => {
           this.departments = data;
@@ -50,7 +50,7 @@ export class DepartmentsComponent implements OnInit {
       return;
     }
 
-    this.http.post('http://cranky_bouman:3000/Departments', this.newDepartment)
+    this.http.post('http://172.17.0.3:3000/Departments', this.newDepartment)
       .subscribe({
         next: (data: any) => {
           alert('Departamento agregado con éxito');
@@ -66,7 +66,7 @@ export class DepartmentsComponent implements OnInit {
       return;
     }
 
-    this.http.delete(`http://cranky_bouman:3000/Departments/${department._id}`)
+    this.http.delete(`http://172.17.0.3:3000/Departments/${department._id}`)
       .subscribe({
         next: () => {
           alert('Departamento eliminado con éxito');

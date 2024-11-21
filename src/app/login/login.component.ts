@@ -20,7 +20,7 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) { }
 
   login() {
-    this.http.post('http://cranky_bouman:3000/Users/login', { email: this.email, password: this.password })
+    this.http.post('http://172.17.0.3:3000/Users/login', { email: this.email, password: this.password })
       .subscribe({
         next: (response: any) => {
           localStorage.setItem('loggedUserId', response.user._id);
