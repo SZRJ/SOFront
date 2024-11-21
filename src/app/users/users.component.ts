@@ -29,7 +29,7 @@ export class UsersComponent implements OnInit {
   }
 
   fetchUsers(): void {
-    this.http.get('http://cranky_bouman:3000/Users')
+    this.http.get('http://4.228.231.241:3000/Users')
       .subscribe({
         next: (data: any) => {
           this.users = data;
@@ -62,7 +62,7 @@ export class UsersComponent implements OnInit {
       readDate: null
     };
 
-    this.http.post('http://cranky_bouman:3000/Messages', newMessage)
+    this.http.post('http://4.228.231.241:3000/Messages', newMessage)
       .subscribe({
         next: () => {
           alert('Mensaje enviado con éxito');

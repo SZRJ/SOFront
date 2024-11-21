@@ -66,7 +66,7 @@ export class DepartmentsComponent implements OnInit {
       return;
     }
 
-    this.http.delete(`http://cranky_bouman:3000/Departments/${department._id}`)
+    this.http.delete(`http://4.228.231.241:3000/Departments/${department._id}`)
       .subscribe({
         next: () => {
           alert('Departamento eliminado con éxito');
