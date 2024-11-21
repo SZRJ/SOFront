@@ -1,35 +1,32 @@
 # Etapa 1: Construcción de la aplicación Angular
 FROM node:20.17.0 AS build
 
-# Establece el directorio de trabajo dentro del contenedor
+# Establecer el directorio de trabajo
 WORKDIR /app
 
-# Copia los archivos de dependencias (para aprovechar la cache de Docker)
+# Copiar los archivos necesarios para la instalación de dependencias
 COPY package*.json ./
 
-# Instala las dependencias
+# Instalar dependencias
 RUN npm install
 
-# Instala Angular CLI globalmente
+# Instalar Angular CLI globalmente
 RUN npm install -g @angular/cli
 
-# Copia todo el código fuente al contenedor
+# Copiar el resto del código fuente
 COPY . .
 
-# Compila la aplicación Angular en modo producción
+# Construir la aplicación en modo producción
 RUN ng build --configuration=production --no-progress
 
-# Depuración: Verifica si la carpeta de salida se generó correctamente
-RUN ls -l /app/dist/
-
-# Etapa 2: Configuración del servidor NGINX para servir la aplicación
+# Etapa 2: Configuración de NGINX
 FROM nginx:latest
 
-# Copia los archivos de Angular construidos a la carpeta estándar de NGINX
-# Cambia '/app/dist/aftas-angular' si el outputPath es diferente
-COPY --from=build /app/dist/aftas-angular /usr/share/nginx/html
+# Copiar los archivos generados por Angular al directorio estándar de NGINX
+COPY --from=build /app/dist/frontend /usr/share/nginx/html
 
-# Exponer el puerto 80 para NGINX
+# Exponer el puerto 80
 EXPOSE 80
 
-# Inicia NGINX (comando predeterminado del contenedor base)
+# Usar el comando por defecto de NGINX
+CMD ["nginx", "-g", "daemon off;"]
