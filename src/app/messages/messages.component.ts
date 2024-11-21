@@ -22,7 +22,7 @@ export class MessagesComponent implements OnInit {
   }
 
   fetchMessages() {
-    this.http.get('http://localhost:3000/Messages')
+    this.http.get('http://cranky_bouman:3000/Messages')
       .subscribe({
         next: (data: any) => {
           this.messages = data;

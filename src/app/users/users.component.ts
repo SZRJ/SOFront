@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit {
   }
 
   fetchUsers(): void {
-    this.http.get('http://localhost:3000/Users')
+    this.http.get('http://cranky_bouman:3000/Users')
       .subscribe({
         next: (data: any) => {
           this.users = data;

@@ -20,7 +20,7 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router) { }
 
   login() {
-    this.http.post('http://localhost:3000/Users/login', { email: this.email, password: this.password })
+    this.http.post('http://cranky_bouman:3000/Users/login', { email: this.email, password: this.password })
       .subscribe({
         next: () => this.router.navigate(['/home']),
         error: (err) => alert('Credenciales incorrectas'),

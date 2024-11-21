@@ -22,7 +22,7 @@ export class DepartmentsComponent implements OnInit {
   }
 
   fetchDepartments() {
-    this.http.get('http://localhost:3000/Departments')
+    this.http.get('http://cranky_bouman:3000/Departments')
       .subscribe({
         next: (data: any) => {
           this.departments = data;
