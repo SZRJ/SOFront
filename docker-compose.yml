@@ -13,8 +13,8 @@ services:
       - "27017:27017"
 
   api:
-    build: ./api  # Asumiendo que tu API está en el directorio ./api
-    container_name: api
+    build: ./app  # Asumiendo que tu API está en el directorio ./api
+    container_name: cranky_bouman
     networks:
       - my_network
     ports:
@@ -27,8 +27,8 @@ services:
       - MONGO_PASS=nilou123
 
   angular:
-    build: ./angular  # Asumiendo que tu app de Angular está en el directorio ./angular
-    container_name: angular
+    build: ./frontend  # Asumiendo que tu app de Angular está en el directorio ./angular
+    container_name: Frontend
     networks:
       - my_network
     ports:
