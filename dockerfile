@@ -1,21 +1,20 @@
-FROM node:20.17.0 AS build
+# Usar una imagen base con Node.js
+FROM node:20.17.0 AS build-stage
 
-WORKDIR /app
+# Crear el directorio de la aplicación dentro del contenedor
+WORKDIR /usr/src/app
 
+# Copiar package.json y package-lock.json para instalar dependencias
 COPY package*.json ./
 
+# Instalar las dependencias de Angular
 RUN npm install
 
-RUN npm install -g @angular/cli
-
+# Copiar todo el proyecto al contenedor
 COPY . .
 
-RUN ng build --configuration=production --no-progress
+# Exponer el puerto 8080 para servir la aplicación
+EXPOSE 8080
 
-FROM nginx:latest
-
-# Copia los archivos de la aplicación Angular construida a la carpeta estándar de NGINX
-COPY --from=build /app/dist/frontend/browser /usr/share/nginx/html
-
-# Exponer el puerto 80 para NGINX
-EXPOSE 80
+# Comando para iniciar Angular en modo desarrollo con ng serve
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0", "--port", "8080"]
